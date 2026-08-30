@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DocuAll - Belgeler</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f4f6f9;
+            color: #333;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-top {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu-item {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: #eeeffe;
+            color: #4f46e5;
+        }
+
+        .logout-item {
+            color: #ef4444;
+            border: 1px solid #fee2e2;
+            background: #fef2f2;
+        }
+
+        .logout-item:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .main-content h2 {
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            padding: 12px;
+            font-size: 13px;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        td {
+            padding: 14px 12px;
+            font-size: 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .document-row {
+            cursor: pointer;
+        }
+
+        .document-row:hover {
+            background-color: #f9fafb;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .modal-text {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .btn-close {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <div class="sidebar-top">
+
+            <div class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                DocuAll
+            </div>
+
+            <ul class="menu-list">
+
+                <li>
+                    <a href="index.html" class="menu-item">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        Ana Sayfa
+                    </a>
+                </li>
+
+                <li>
+                    <a href="belgeler.html" class="menu-item active">
+                        <i class="fa-solid fa-folder-open"></i>
+                        Belgeler
+                    </a>
+                </li>
+
+                <li>
+                    <a href="belge-yukle.html" class="menu-item">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Belge Yükle
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <a href="login.html" class="menu-item logout-item">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Çıkış Yap
+        </a>
+
+    </div>
+
+
+    <div class="main-content">
+
+        <h2>Tüm Dijital Belgeler</h2>
+
+        <p class="description">
+            Birim bazlı belgeler ve erişim durumları
+            (Detay için belgeye tıklayın)
+        </p>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Dosya Adı</th>
+                        <th>Ait Olduğu Birim</th>
+                        <th>Gerekli Unvan</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr class="document-row"
+                        onclick="openDoc('Şirket_Gizlilik_Sözleşmesi.pdf', true, 'Avukat')">
+
+                        <td>
+                            <i class="fa-regular fa-file-pdf"
+                                style="color: #dc2626;"></i>
+                            Şirket_Gizlilik_Sözleşmesi.pdf
+                        </td>
+
+                        <td>Hukuk Departmanı</td>
+                        <td>Avukat</td>
+
+                        <td>
+                            <span class="badge badge-success">
+                                <i class="fa-solid fa-unlock"></i>
+                                Açık
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr class="document-row"
+                        onclick="openDoc('Personel_Maaş_Listesi.docx', false, 'İK Uzmanı')">
+
+                        <td>
+                            <i class="fa-regular fa-file-word"
+                                style="color: #2563eb;"></i>
+                            Personel_Maaş_Listesi.docx
+                        </td>
+
+                        <td>İnsan Kaynakları</td>
+                        <td>İK Uzmanı</td>
+
+                        <td>
+                            <span class="badge badge-danger">
+                                <i class="fa-solid fa-lock"></i>
+                                Kilitli
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr class="document-row"
+                        onclick="openDoc('Mali_Bilanço_Q2_2026.xlsx', false, 'Mali Müşavir')">
+
+                        <td>
+                            <i class="fa-regular fa-file-excel"
+                                style="color: #059669;"></i>
+                            Mali_Bilanço_Q2_2026.xlsx
+                        </td>
+
+                        <td>Finans & Muhasebe</td>
+                        <td>Mali Müşavir</td>
+
+                        <td>
+                            <span class="badge badge-danger">
+                                <i class="fa-solid fa-lock"></i>
+                                Kilitli
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal-overlay" id="customModal">
+
+        <div class="modal-box">
+
+            <div class="modal-icon" id="modalIcon"></div>
+
+            <div class="modal-title" id="modalTitle"></div>
+
+            <div class="modal-text" id="modalText"></div>
+
+            <button class="btn-close" onclick="closeModal()">
+                Tamam
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function openDoc(docName, isAccessible, requiredRole) {
+
+            const modal = document.getElementById("customModal");
+            const icon = document.getElementById("modalIcon");
+            const title = document.getElementById("modalTitle");
+            const text = document.getElementById("modalText");
+
+            if (isAccessible) {
+
+                icon.innerHTML =
+                    '<i class="fa-solid fa-circle-check" style="color: #10b981;"></i>';
+
+                title.innerText = "Belge Görüntüleniyor";
+                title.style.color = "#10b981";
+
+                text.innerText =
+                    '"' + docName +
+                    '" belgesini görüntülemek için yetkiniz doğrulandı. Belge indiriliyor...';
+
+            } else {
+
+                icon.innerHTML =
+                    '<i class="fa-solid fa-triangle-exclamation" style="color: #ef4444;"></i>';
+
+                title.innerText = "Erişim Engellendi!";
+                title.style.color = "#ef4444";
+
+                text.innerText =
+                    '"' + docName +
+                    '" belgesine erişim yetkiniz yok. Bu belgeye sadece "' +
+                    requiredRole +
+                    '" rolündeki kullanıcılar erişebilir.';
+            }
+
+            modal.style.display = "flex";
+        }
+
+
+        function closeModal() {
+            document.getElementById("customModal").style.display = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>
